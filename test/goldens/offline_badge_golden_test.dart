@@ -12,6 +12,7 @@ void main() {
   testWidgets('OfflineBadge — rendu français par défaut', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
+        locale: const Locale('fr'),
         theme: ThemeData(fontFamily: 'Ahem'),
         localizationsDelegates: const [
           AppLocalizations.delegate,
