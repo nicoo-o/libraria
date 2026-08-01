@@ -320,9 +320,12 @@ void main() {
       coverUrl: 'https://example.com/cover_broken.jpg',
     );
     await manager.enqueue(resultWithBadCover);
-    await Future<void>.delayed(const Duration(milliseconds: 100));
 
     final job = manager.jobs.single;
+    for (var i = 0; i < 50 && job.status == DownloadStatus.downloading; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    }
+
     expect(
         job.status, DownloadStatus.completed); // le livre a réussi malgré tout
     expect(job.coverPath,
