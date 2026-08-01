@@ -1,0 +1,14 @@
+# Configuration flutter gen-l10n (Partie 7). Généré automatiquement à
+# `flutter pub get` / `flutter run` grâce à `generate: true` dans pubspec.yaml —
+# la classe AppLocalizations (lib/l10n/app_localizations.dart) est un fichier
+# GÉNÉRÉ, ne pas l'éditer à la main ni le committer si le CI régénère à chaque
+# build (09_TESTS_CI.md).
+arb-dir: lib/l10n
+template-arb-file: app_fr.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+# Le français est la langue source de l'app (tout le contenu a été écrit en
+# français jusqu'ici) — nullable-getter: false impose une traduction complète
+# dans chaque .arb, pas de repli silencieux sur le français si l'anglais est
+# incomplet.
+nullable-getter: false

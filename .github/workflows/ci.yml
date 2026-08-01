@@ -1,0 +1,108 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  analyze-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: { flutter-version: '3.x' }
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test --coverage
+      - uses: VeryGoodOpenSource/very_good_coverage@v3
+        with: { path: coverage/lcov.info, min_coverage: 80 }
+
+  golden-tests:
+    runs-on: ubuntu-latest
+    needs: analyze-and-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: { flutter-version: '3.x' }
+      - run: flutter pub get
+      # Générer la baseline (`flutter test --update-goldens test/goldens`) AVANT le premier
+      # run de ce job, sinon la comparaison échoue dès le départ (09_TESTS_CI.md).
+      - run: flutter test test/goldens
+
+  # Play Store Edition — sources étendues ABSENTES du binaire (ADR-014).
+  # C'est ce build qui monte sur le Google Play Console.
+  build-android-playstore:
+    runs-on: ubuntu-latest
+    needs: analyze-and-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: { flutter-version: '3.x' }
+      - run: flutter pub get
+      - run: flutter build appbundle --release --obfuscate --split-debug-info=build/symbols/playstore/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-playstore-aab
+          path: build/app/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+
+  # GitHub Edition — sources étendues disponibles, OFF par défaut runtime.
+  # C'est l'APK attaché aux GitHub Releases.
+  build-android-github:
+    runs-on: ubuntu-latest
+    needs: analyze-and-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: { flutter-version: '3.x' }
+      - run: flutter pub get
+      - run: flutter build apk --release --dart-define=EXTENDED_SOURCES=true --obfuscate --split-debug-info=build/symbols/github/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-github-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+
+  build-windows:
+    runs-on: windows-latest
+    needs: analyze-and-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: { flutter-version: '3.x' }
+      - run: flutter pub get
+      - run: flutter build windows --release --dart-define=EXTENDED_SOURCES=true
+      - name: Compresser le build Windows
+        shell: pwsh
+        run: |
+          $releaseDir = (Get-ChildItem -Path build\windows -Recurse -Filter "*.exe" | Select-Object -First 1).DirectoryName
+          Compress-Archive -Path "$releaseDir\*" -DestinationPath libraria-windows.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-zip
+          path: libraria-windows.zip
+          if-no-files-found: error
+
+  # Se déclenche uniquement sur un tag `v*` (ex. v0.1.0) — voir le trigger `on.push.tags` en haut du fichier.
+  # Récupère les artefacts des deux jobs de build ci-dessus et publie la Release GitHub avec les fichiers attachés.
+  publish-release:
+    runs-on: ubuntu-latest
+    needs: [build-android-github, build-windows]
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Lister les fichiers récupérés (debug)
+        run: find artifacts -type f
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: "Libraria ${{ github.ref_name }}"
+          generate_release_notes: true
+          files: |
+            artifacts/android-github-apk/app-release.apk
+            artifacts/windows-zip/libraria-windows.zip

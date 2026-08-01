@@ -1,0 +1,103 @@
+﻿{
+  "@@locale": "en",
+
+  "navLibrary": "Library",
+  "navSearch": "Search",
+  "navDownloads": "Downloads",
+  "navSettings": "Settings",
+
+  "offlineBanner": "Offline — search and downloads paused",
+
+  "libraryEmptyState": "Your library is empty — start with a search.",
+
+  "searchHint": "Search for a book or audiobook…",
+  "searchNoResults": "No results for this search.",
+  "searchSourcesUnavailable": "Unavailable sources: {sources}",
+
+  "retry": "Retry",
+  "downloadTooltip": "Download",
+
+  "sourceStatusAvailable": "Available",
+  "sourceStatusRecovering": "Recovering",
+  "sourceStatusUnavailable": "Unavailable",
+  "searchAlreadyOwned": "Already in your library",
+
+  "queueTitle": "Downloads ({downloading}/{max} active)",
+  "queueEmpty": "No downloads in progress.",
+  "queueCompleted": "Done",
+
+  "pause": "Pause",
+  "resume": "Resume",
+
+  "settingsDiagnosticTitle": "Share a diagnostic report",
+  "settingsDiagnosticSubtitle": "No automatic telemetry — manual sending only (ADR-006).",
+
+  "settingsBackupTitle": "Local backup",
+  "settingsBackupWarning": "Backs up the library, settings, and covers — not the EPUB/audio files themselves (re-downloadable from their sources).",
+  "settingsBackupCreate": "Create a backup",
+  "settingsBackupSubtitle": "Local archive, with integrity check",
+  "settingsBackupSuccess": "Backup created ({size}).",
+  "settingsBackupFailure": "Backup failed.",
+  "settingsBackupVerify": "Verify integrity",
+  "settingsBackupVerifyOk": "Integrity verified — the archive has not been altered.",
+  "settingsBackupVerifyFailed": "Verification failed — the archive appears corrupted or modified.",
+
+  "settingsCoreSourcesTitle": "Search sources",
+  "settingsExtendedSourcesTitle": "Extended sources (GitHub Edition)",
+  "settingsExtendedSourcesWarning": "Disabled by default. These sources aggregate catalogs with a legal status that varies by country. You are responsible for their use.",
+  "settingsSourceIdLabel": "ID: {id}",
+
+  "mediaDetailUnknownAuthor": "Unknown author",
+  "mediaDetailOpen": "Open",
+  "mediaDetailDelete": "Delete",
+  "mediaDetailDeleteConfirmTitle": "Move to trash?",
+  "mediaDetailDeleteConfirmBody": "\"{title}\" will be moved to trash and permanently deleted after 30 days. You can restore it before then.",
+  "cancel": "Cancel",
+  "mediaDetailMissingFile": "This item's local file could not be found.",
+  "mediaDetailRelink": "Relink file",
+  "mediaDetailRelinkSuccess": "File relinked successfully.",
+
+  "mediaDetailMarkAsRead": "Mark as read",
+  "mediaDetailMarkedAsRead": "Read ✓",
+  "mediaDetailDeletedUndo": "\"{title}\" was moved to trash.",
+  "undo": "Undo",
+
+  "readerNoLocalFile": "No local file associated with this item.",
+  "audioNoFilesFound": "No audio file found in this folder.",
+  "audioLoadError": "Couldn't play this audio file: {error}",
+  "audioRewind30": "Rewind 30 seconds",
+  "audioForward30": "Forward 30 seconds",
+  "audioPlay": "Play",
+
+  "audioLoadErrorGeneric": "Playback of this audio file failed.",
+  "audioChaptersTitle": "Chapters",
+  "audioChapterNumber": "Chapter {number}",
+  "audioBackgroundHint": "Playback continues in the background — you can close this screen or turn off the screen.",
+
+  "epubOpenFailed": "This file couldn't be opened in the built-in reader (advanced formatting, script, or unsupported protection).",
+  "epubOpenWith": "Open with…",
+  "epubNoAppFound": "No app capable of opening this file was found.",
+  "epubTableOfContents": "Table of contents",
+  "epubSwitchToScrolled": "Switch to continuous scroll",
+  "epubSwitchToPaginated": "Switch to page-by-page",
+
+  "epubAddBookmark": "Add a bookmark here",
+  "epubBookmarkAdded": "Bookmark added.",
+  "epubBookmarksTitle": "Bookmarks",
+  "epubNoBookmarks": "No bookmarks for this item.",
+  "epubBookmarkAt": "Bookmark from {date}",
+
+  "epubTheme": "Reading theme",
+  "epubThemeClair": "Light",
+  "epubThemeSombre": "Dark",
+  "epubThemeLiseuse": "Sepia",
+
+  "offlineBadge": "Offline",
+
+  "trashTitle": "Trash",
+  "trashSubtitle": "Deleted items, awaiting permanent removal",
+  "trashEmpty": "Trash is empty.",
+  "trashRestore": "Restore",
+  "trashDaysRemaining": "Permanently deleted in {days} d",
+  "trashItemRestored": "\"{title}\" has been restored."
+}

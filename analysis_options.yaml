@@ -1,0 +1,12 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    always_declare_return_types: true
+    avoid_print: true # utiliser AppLogger (lib/core/logging/app_logger.dart) partout ailleurs
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "build/**"

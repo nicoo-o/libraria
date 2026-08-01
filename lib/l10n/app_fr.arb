@@ -1,0 +1,297 @@
+﻿{
+  "@@locale": "fr",
+
+  "navLibrary": "Bibliothèque",
+  "@navLibrary": { "description": "Libellé de l'onglet Bibliothèque (navigation) et titre de son écran." },
+
+  "navSearch": "Recherche",
+  "@navSearch": { "description": "Libellé de l'onglet Recherche (navigation) et titre de son écran." },
+
+  "navDownloads": "Téléchargements",
+  "@navDownloads": { "description": "Libellé de l'onglet Téléchargements (navigation)." },
+
+  "navSettings": "Paramètres",
+  "@navSettings": { "description": "Libellé de l'onglet Paramètres (navigation) et titre de son écran." },
+
+  "offlineBanner": "Hors ligne — recherche et téléchargements en pause",
+  "@offlineBanner": { "description": "Bannière affichée en haut de l'app quand ConnectivityService.isOnline est faux." },
+
+  "libraryEmptyState": "Ta bibliothèque est vide — commence par une recherche.",
+  "@libraryEmptyState": { "description": "Message affiché quand la bibliothèque ne contient aucun ouvrage." },
+
+  "searchHint": "Rechercher un livre ou un audiobook…",
+  "@searchHint": { "description": "Texte indicatif du champ de recherche." },
+
+  "searchNoResults": "Aucun résultat pour cette recherche.",
+  "@searchNoResults": { "description": "Affiché quand la recherche ne retourne aucun résultat." },
+
+  "searchSourcesUnavailable": "Sources indisponibles : {sources}",
+  "@searchSourcesUnavailable": {
+    "description": "Affiché quand une ou plusieurs sources ont leur circuit breaker ouvert.",
+    "placeholders": {
+      "sources": { "type": "String", "example": "Internet Archive, LibriVox" }
+    }
+  },
+
+  "retry": "Réessayer",
+  "@retry": { "description": "Libellé générique d'un bouton/action de nouvelle tentative." },
+
+  "downloadTooltip": "Télécharger",
+  "@downloadTooltip": { "description": "Tooltip du bouton de téléchargement sur un résultat de recherche." },
+
+  "sourceStatusAvailable": "Disponible",
+  "@sourceStatusAvailable": { "description": "État d'une source de contenu dont le circuit breaker est fermé (chapitre 12, NF-069)." },
+
+  "sourceStatusRecovering": "Reprise en cours",
+  "@sourceStatusRecovering": { "description": "État d'une source de contenu dont le circuit breaker est semi-ouvert (halfOpen), en test de reprise." },
+
+  "sourceStatusUnavailable": "Indisponible",
+  "@sourceStatusUnavailable": { "description": "État d'une source de contenu dont le circuit breaker est ouvert." },
+
+  "searchAlreadyOwned": "Déjà dans votre bibliothèque",
+  "@searchAlreadyOwned": { "description": "Tooltip du badge affiché sur un résultat de recherche déjà présent dans la bibliothèque (chapitre 12, NF-075)." },
+
+  "queueTitle": "Téléchargements ({downloading}/{max} actifs)",
+  "@queueTitle": {
+    "description": "Titre de l'écran Téléchargements, avec le nombre de jobs actifs sur le maximum autorisé.",
+    "placeholders": {
+      "downloading": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+
+  "queueEmpty": "Aucun téléchargement en cours.",
+  "@queueEmpty": { "description": "Affiché quand la file de téléchargements est vide." },
+
+  "queueCompleted": "Terminé",
+  "@queueCompleted": { "description": "Statut affiché pour un téléchargement terminé." },
+
+  "pause": "Mettre en pause",
+  "@pause": { "description": "Tooltip/action de mise en pause (file de téléchargement et lecteur audio)." },
+
+  "resume": "Reprendre",
+  "@resume": { "description": "Tooltip du bouton de reprise d'un téléchargement en pause." },
+
+  "settingsDiagnosticTitle": "Partager un rapport de diagnostic",
+  "@settingsDiagnosticTitle": { "description": "Titre de l'option de partage du rapport de diagnostic." },
+
+  "settingsDiagnosticSubtitle": "Zéro télémétrie automatique — envoi manuel uniquement (ADR-006).",
+  "@settingsDiagnosticSubtitle": { "description": "Sous-titre expliquant l'absence de télémétrie automatique." },
+
+  "settingsBackupTitle": "Sauvegarde locale",
+  "@settingsBackupTitle": { "description": "Titre de la section de sauvegarde locale (chapitre 12, NF-061/NF-062)." },
+
+  "settingsBackupWarning": "Sauvegarde la bibliothèque, les réglages et les couvertures — pas les fichiers EPUB/audio eux-mêmes (re-téléchargeables depuis leurs sources).",
+  "@settingsBackupWarning": { "description": "Rappel du périmètre exact de la sauvegarde (ce qui est inclus / exclu)." },
+
+  "settingsBackupCreate": "Créer une sauvegarde",
+  "@settingsBackupCreate": { "description": "Bouton pour lancer une sauvegarde manuelle." },
+
+  "settingsBackupSubtitle": "Archive locale, avec vérification d'intégrité",
+  "@settingsBackupSubtitle": { "description": "Sous-titre du bouton de création de sauvegarde." },
+
+  "settingsBackupSuccess": "Sauvegarde créée ({size}).",
+  "@settingsBackupSuccess": {
+    "description": "Confirmation après une sauvegarde réussie, avec la taille de l'archive.",
+    "placeholders": {
+      "size": { "type": "String" }
+    }
+  },
+
+  "settingsBackupFailure": "La sauvegarde a échoué.",
+  "@settingsBackupFailure": { "description": "Message affiché si createBackup() échoue." },
+
+  "settingsBackupVerify": "Vérifier l'intégrité",
+  "@settingsBackupVerify": { "description": "Tooltip du bouton de vérification d'intégrité d'une sauvegarde (NF-062)." },
+
+  "settingsBackupVerifyOk": "Intégrité vérifiée — l'archive n'a pas été altérée.",
+  "@settingsBackupVerifyOk": { "description": "Résultat positif de verifyBackup()." },
+
+  "settingsBackupVerifyFailed": "Échec de vérification — l'archive semble corrompue ou modifiée.",
+  "@settingsBackupVerifyFailed": { "description": "Résultat négatif de verifyBackup()." },
+
+  "settingsCoreSourcesTitle": "Sources de recherche",
+  "@settingsCoreSourcesTitle": { "description": "Titre de la section d'activation/désactivation des 4 sources V1 de base." },
+
+  "settingsExtendedSourcesTitle": "Sources étendues (GitHub Edition)",
+  "@settingsExtendedSourcesTitle": { "description": "Titre de la section des sources étendues (opt-in, GitHub Edition uniquement)." },
+
+  "settingsExtendedSourcesWarning": "Désactivées par défaut. Ces sources agrègent des catalogues au statut juridique variable selon les pays. Vous êtes responsable de leur usage.",
+  "@settingsExtendedSourcesWarning": { "description": "Avertissement affiché au-dessus des sources étendues." },
+
+  "settingsSourceIdLabel": "Identifiant : {id}",
+  "@settingsSourceIdLabel": {
+    "description": "Sous-titre affichant l'identifiant technique d'une source étendue.",
+    "placeholders": {
+      "id": { "type": "String" }
+    }
+  },
+
+  "mediaDetailUnknownAuthor": "Auteur inconnu",
+  "@mediaDetailUnknownAuthor": { "description": "Affiché quand un ouvrage n'a pas d'auteur renseigné." },
+
+  "mediaDetailOpen": "Ouvrir",
+  "@mediaDetailOpen": { "description": "Bouton pour ouvrir un ouvrage (lecteur EPUB ou audio)." },
+
+  "mediaDetailDelete": "Supprimer",
+  "@mediaDetailDelete": { "description": "Tooltip/bouton de suppression (vers la corbeille) d'un ouvrage." },
+
+  "mediaDetailDeleteConfirmTitle": "Mettre à la corbeille ?",
+  "@mediaDetailDeleteConfirmTitle": { "description": "Titre de la boîte de dialogue de confirmation de suppression." },
+
+  "mediaDetailDeleteConfirmBody": "« {title} » sera déplacé vers la corbeille et supprimé définitivement après 30 jours. Vous pourrez le restaurer avant cette échéance.",
+  "@mediaDetailDeleteConfirmBody": {
+    "description": "Corps de la boîte de dialogue de confirmation de suppression.",
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  },
+
+  "cancel": "Annuler",
+  "@cancel": { "description": "Bouton générique d'annulation." },
+
+  "mediaDetailMissingFile": "Le fichier local de cet ouvrage est introuvable.",
+  "@mediaDetailMissingFile": { "description": "Message affiché quand is_missing est vrai sur l'ouvrage." },
+
+  "mediaDetailRelink": "Relier le fichier",
+  "@mediaDetailRelink": { "description": "Bouton pour relier un fichier local après déplacement/renommage externe." },
+
+  "mediaDetailRelinkSuccess": "Fichier relié avec succès.",
+  "@mediaDetailRelinkSuccess": { "description": "Confirmation après un relink() réussi." },
+
+  "mediaDetailMarkAsRead": "Marquer comme lu",
+  "@mediaDetailMarkAsRead": { "description": "Bouton pour marquer manuellement un ouvrage comme entièrement lu (chapitre 12, NF-006)." },
+
+  "mediaDetailMarkedAsRead": "Lu ✓",
+  "@mediaDetailMarkedAsRead": { "description": "État du bouton une fois l'ouvrage marqué comme lu." },
+
+  "mediaDetailDeletedUndo": "« {title} » a été déplacé vers la corbeille.",
+  "@mediaDetailDeletedUndo": {
+    "description": "Message du SnackBar après suppression, avec bouton Annuler (chapitre 12, NF-085).",
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  },
+
+  "undo": "Annuler",
+  "@undo": { "description": "Libellé générique du bouton d'annulation d'une action réversible (SnackBarAction), distinct de \"cancel\" qui annule une boîte de dialogue avant validation." },
+
+  "readerNoLocalFile": "Aucun fichier local associé à cet ouvrage.",
+  "@readerNoLocalFile": { "description": "Affiché quand un ouvrage n'a pas (ou plus) de fichier local (lecteur EPUB et audio)." },
+
+  "audioNoFilesFound": "Aucun fichier audio trouvé dans ce dossier.",
+  "@audioNoFilesFound": { "description": "Affiché quand le dossier d'un audiobook extrait ne contient aucun MP3." },
+
+  "audioLoadError": "Impossible de lire ce fichier audio : {error}",
+  "@audioLoadError": {
+    "description": "Affiché quand le chargement de l'audiobook échoue pour une raison inattendue.",
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "audioRewind30": "Reculer de 30 secondes",
+  "@audioRewind30": { "description": "Tooltip du bouton de retour arrière de 30 secondes." },
+
+  "audioForward30": "Avancer de 30 secondes",
+  "@audioForward30": { "description": "Tooltip du bouton d'avance rapide de 30 secondes." },
+
+  "audioPlay": "Lire",
+  "@audioPlay": { "description": "Tooltip du bouton de lecture (quand en pause)." },
+
+  "audioLoadErrorGeneric": "La lecture de ce fichier audio a échoué.",
+  "@audioLoadErrorGeneric": { "description": "Message générique affiché quand le chargement de l'audiobook échoue pour une raison non catégorisée." },
+
+  "audioChaptersTitle": "Chapitres",
+  "@audioChaptersTitle": { "description": "Titre de la liste des chapitres (fichiers) d'un audiobook, et tooltip du bouton qui l'ouvre." },
+
+  "audioChapterNumber": "Chapitre {number}",
+  "@audioChapterNumber": {
+    "description": "Libellé d'un chapitre dans la liste, par numéro (les audiobooks multi-fichiers n'ont pas de titre de chapitre exploitable sans lecture de métadonnées ID3).",
+    "placeholders": {
+      "number": { "type": "int" }
+    }
+  },
+
+  "audioBackgroundHint": "La lecture continue en arrière-plan — vous pouvez fermer cet écran ou éteindre l'écran.",
+  "@audioBackgroundHint": { "description": "Rappel affiché sous les contrôles du lecteur audio, indiquant que la lecture survit à la fermeture de l'écran (notification/lockscreen)." },
+
+  "epubOpenFailed": "Ce fichier n'a pas pu être ouvert dans le lecteur intégré (mise en forme avancée, script ou protection non pris en charge).",
+  "@epubOpenFailed": { "description": "Message affiché quand epub_view ne parvient pas à ouvrir un fichier EPUB." },
+
+  "epubOpenWith": "Ouvrir avec…",
+  "@epubOpenWith": { "description": "Bouton de repli pour ouvrir l'EPUB dans une autre application." },
+
+  "epubNoAppFound": "Aucune application capable d'ouvrir ce fichier n'a été trouvée.",
+  "@epubNoAppFound": { "description": "Message affiché quand aucune application ne peut ouvrir le fichier EPUB en repli." },
+
+  "epubTableOfContents": "Table des matières",
+  "@epubTableOfContents": { "description": "Tooltip du bouton ouvrant la table des matières de l'EPUB." },
+  "epubSwitchToScrolled": "Passer en défilement continu",
+  "@epubSwitchToScrolled": { "description": "Tooltip du bouton pour basculer du mode page par page vers le défilement continu." },
+  "epubSwitchToPaginated": "Passer en mode page par page",
+  "@epubSwitchToPaginated": { "description": "Tooltip du bouton pour basculer du défilement continu vers le mode page par page." },
+
+  "epubAddBookmark": "Ajouter un signet ici",
+  "@epubAddBookmark": { "description": "Tooltip du bouton pour ajouter un signet à la position courante." },
+
+  "epubBookmarkAdded": "Signet ajouté.",
+  "@epubBookmarkAdded": { "description": "Confirmation affichée après l'ajout d'un signet." },
+
+  "epubBookmarksTitle": "Signets",
+  "@epubBookmarksTitle": { "description": "Titre de la liste des signets d'un ouvrage." },
+
+  "epubNoBookmarks": "Aucun signet pour cet ouvrage.",
+  "@epubNoBookmarks": { "description": "Affiché quand un ouvrage n'a aucun signet enregistré." },
+
+  "epubBookmarkAt": "Signet du {date}",
+  "@epubBookmarkAt": {
+    "description": "Libellé d'un signet dans la liste, avec sa date de création.",
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "epubTheme": "Thème de lecture",
+  "@epubTheme": { "description": "Tooltip du bouton pour changer le thème de lecture (clair/sombre/liseuse)." },
+
+  "epubThemeClair": "Clair",
+  "@epubThemeClair": { "description": "Nom du thème de lecture clair." },
+
+  "epubThemeSombre": "Sombre",
+  "@epubThemeSombre": { "description": "Nom du thème de lecture sombre." },
+
+  "epubThemeLiseuse": "Sépia",
+  "@epubThemeLiseuse": { "description": "Nom du thème de lecture sépia (liseuse)." },
+
+  "offlineBadge": "Hors ligne",
+  "@offlineBadge": { "description": "Badge affiché sur un ouvrage dont le fichier local est manquant." },
+
+  "trashTitle": "Corbeille",
+  "@trashTitle": { "description": "Titre de l'écran Corbeille et libellé de l'entrée dans Paramètres." },
+
+  "trashSubtitle": "Éléments supprimés, en attente d'effacement définitif",
+  "@trashSubtitle": { "description": "Sous-titre de l'entrée Corbeille dans l'écran Paramètres." },
+
+  "trashEmpty": "La corbeille est vide.",
+  "@trashEmpty": { "description": "Affiché quand la corbeille ne contient aucun élément." },
+
+  "trashRestore": "Restaurer",
+  "@trashRestore": { "description": "Bouton pour restaurer un élément de la corbeille." },
+
+  "trashDaysRemaining": "Suppression définitive dans {days} j",
+  "@trashDaysRemaining": {
+    "description": "Nombre de jours restants avant la purge définitive d'un élément de la corbeille.",
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+
+  "trashItemRestored": "« {title} » a été restauré.",
+  "@trashItemRestored": {
+    "description": "Confirmation affichée après restauration d'un élément.",
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  }
+}
