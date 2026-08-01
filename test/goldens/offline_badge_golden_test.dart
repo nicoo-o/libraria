@@ -11,15 +11,16 @@ import 'package:libraria/widgets/cover_placeholder.dart';
 void main() {
   testWidgets('OfflineBadge — rendu français par défaut', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        localizationsDelegates: [
+      MaterialApp(
+        theme: ThemeData(fontFamily: 'Ahem'),
+        localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(
+        home: const Scaffold(
           body: Center(child: OfflineBadge()),
         ),
       ),
