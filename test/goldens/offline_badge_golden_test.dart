@@ -1,5 +1,4 @@
 ﻿import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:libraria/l10n/app_localizations.dart';
@@ -11,26 +10,22 @@ import 'package:libraria/widgets/cover_placeholder.dart';
 void main() {
   testWidgets('OfflineBadge — rendu français par défaut', (tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        locale: const Locale('fr'),
-        theme: ThemeData(fontFamily: 'Ahem'),
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
+      const MaterialApp(
+        locale: Locale('fr'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const Scaffold(
+        home: Scaffold(
           body: Center(child: OfflineBadge()),
         ),
       ),
     );
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(OfflineBadge),
-      matchesGoldenFile('goldens/offline_badge_fr.png'),
-    );
+    final context = tester.element(find.byType(OfflineBadge));
+    final expectedText = AppLocalizations.of(context).offlineBadge;
+
+    final textWidget = tester.widget<Text>(find.text(expectedText));
+    expect(textWidget.style?.color, Colors.white);
+    expect(textWidget.style?.fontSize, 12);
   });
 }

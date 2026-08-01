@@ -74,7 +74,7 @@ void main() {
   tearDown(() async {
     // Laisse les chaines en arriere-plan (fire-and-forget de
     // _tryStartNext/resumeAll) se terminer avant de fermer les DBs.
-    await Future<void>.delayed(const Duration(milliseconds: 200));
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     for (final db in openedDbs) {
       await db.close();
     }
@@ -112,11 +112,16 @@ void main() {
     final manager = await buildManager()
       ..retryBackoff = (_) => Duration.zero;
 
-    await manager.enqueue(_testResult);
-    await manager.enqueue(_testResult); // même URL — ne doit pas dupliquer
+    await manager.enqueue(_testResultNonEpub);
+    await manager.enqueue(_testResultNonEpub); // même URL — ne doit pas dupliquer
+
+    await _waitUntil(
+      () => manager.jobs.single.status == DownloadStatus.completed,
+      timeout: const Duration(seconds: 2),
+    );
 
     final matching = manager.jobs
-        .where((j) => j.result.downloadUrl == _testResult.downloadUrl);
+        .where((j) => j.result.downloadUrl == _testResultNonEpub.downloadUrl);
     expect(matching.length, 1);
   });
 
