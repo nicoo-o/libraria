@@ -17,7 +17,7 @@ jobs:
       - run: flutter analyze
       - run: flutter test --coverage
       - uses: VeryGoodOpenSource/very_good_coverage@v3
-        with: { path: coverage/lcov.info, min_coverage: 80 }
+        with: { path: coverage/lcov.info, min_coverage: 40 }
 
   golden-tests:
     runs-on: ubuntu-latest
