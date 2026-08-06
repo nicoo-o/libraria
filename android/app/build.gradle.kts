@@ -32,6 +32,12 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+            // R8/minification est activé par défaut par le plugin Gradle Flutter sur les
+            // builds release, indépendamment du flag CLI --obfuscate. flutter_inappwebview_android
+            // (1.1.3, dernière version stable) référence un fichier ProGuard que R8 refuse
+            // désormais d'évaluer -> désactivé le temps que le package tiers soit corrigé.
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }
