@@ -41,6 +41,15 @@ jobs:
       - uses: subosito/flutter-action@v2
         with: { flutter-version: '3.x' }
       - run: flutter pub get
+      # AGP a retiré le support de getDefaultProguardFile('proguard-android.txt') — Gradle évalue
+      # ce fichier du plugin flutter_inappwebview_android (dernière version stable, 1.1.3) dès la
+      # phase de configuration, donc même isMinifyEnabled=false ne suffit pas à l'éviter.
+      # Voir https://github.com/pichillilorenzo/flutter_inappwebview/issues (proguard-android.txt).
+      - name: Patch flutter_inappwebview_android build.gradle
+        shell: bash
+        run: |
+          find "$HOME/.pub-cache" -path "*flutter_inappwebview_android*/android/build.gradle" -exec \
+            sed -i "s/getDefaultProguardFile('proguard-android.txt')/getDefaultProguardFile('proguard-android-optimize.txt')/g" {} +
       - run: flutter build appbundle --release
       - uses: actions/upload-artifact@v4
         with:
@@ -58,6 +67,11 @@ jobs:
       - uses: subosito/flutter-action@v2
         with: { flutter-version: '3.x' }
       - run: flutter pub get
+      - name: Patch flutter_inappwebview_android build.gradle
+        shell: bash
+        run: |
+          find "$HOME/.pub-cache" -path "*flutter_inappwebview_android*/android/build.gradle" -exec \
+            sed -i "s/getDefaultProguardFile('proguard-android.txt')/getDefaultProguardFile('proguard-android-optimize.txt')/g" {} +
       - run: flutter build apk --release --dart-define=EXTENDED_SOURCES=true
       - uses: actions/upload-artifact@v4
         with:
