@@ -41,7 +41,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with: { flutter-version: '3.x' }
       - run: flutter pub get
-      - run: flutter build appbundle --release --obfuscate --split-debug-info=build/symbols/playstore/
+      - run: flutter build appbundle --release
       - uses: actions/upload-artifact@v4
         with:
           name: android-playstore-aab
@@ -58,7 +58,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with: { flutter-version: '3.x' }
       - run: flutter pub get
-      - run: flutter build apk --release --dart-define=EXTENDED_SOURCES=true --obfuscate --split-debug-info=build/symbols/github/
+      - run: flutter build apk --release --dart-define=EXTENDED_SOURCES=true
       - uses: actions/upload-artifact@v4
         with:
           name: android-github-apk
@@ -73,7 +73,14 @@ jobs:
       - uses: subosito/flutter-action@v2
         with: { flutter-version: '3.x' }
       - run: flutter pub get
+      # Contournement d'une régression MSVC (VS 18.6, mai 2026) : le compilateur refuse
+      # désormais les en-têtes <experimental/coroutine> encore utilisés par certains plugins
+      # (flutter_inappwebview_windows, permission_handler_windows). CL est une variable
+      # d'environnement lue nativement par cl.exe pour tout fichier compilé dans ce job.
+      # Voir https://github.com/flutter/flutter/issues/186452
       - run: flutter build windows --release --dart-define=EXTENDED_SOURCES=true
+        env:
+          CL: /D_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS
       - name: Compresser le build Windows
         shell: pwsh
         run: |
