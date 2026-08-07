@@ -99,8 +99,27 @@ jobs:
       - name: Compresser le build Windows
         shell: pwsh
         run: |
-          $releaseDir = (Get-ChildItem -Path build\windows -Recurse -Filter "*.exe" | Select-Object -First 1).DirectoryName
+          # Chemin fixe pour un build Windows Flutter release (x64) depuis Flutter 3.13+.
+          # L'ancienne recherche par "premier .exe trouvé" pouvait tomber sur un exécutable
+          # intermédiaire (outil de build, plugin...) au lieu du vrai dossier Release, ce qui
+          # produisait un zip incomplet (sans les DLL/data) -> l'app ne se lançait pas du tout.
+          $releaseDir = "build\windows\x64\runner\Release"
+          if (-not (Test-Path $releaseDir)) {
+            Write-Host "Chemin attendu introuvable, recherche de secours..."
+            $found = Get-ChildItem -Path build\windows -Recurse -Directory -Filter "Release" | Select-Object -First 1
+            if (-not $found) { throw "Aucun dossier Release trouve sous build\windows" }
+            $releaseDir = $found.FullName
+          }
+          Write-Host "Dossier Release utilise : $releaseDir"
+          Write-Host "--- Contenu ---"
+          Get-ChildItem -Path $releaseDir -Recurse | Select-Object FullName
+          $exeCount = (Get-ChildItem -Path $releaseDir -Filter "*.exe").Count
+          if ($exeCount -eq 0) { throw "Aucun .exe dans $releaseDir - build incomplet" }
+          if (-not (Test-Path "$releaseDir\data")) { throw "Dossier 'data' absent de $releaseDir - build incomplet" }
           Compress-Archive -Path "$releaseDir\*" -DestinationPath libraria-windows.zip
+          Write-Host "--- Contenu du zip ---"
+          Expand-Archive -Path libraria-windows.zip -DestinationPath _zipcheck
+          Get-ChildItem -Path _zipcheck -Recurse | Select-Object FullName
       - uses: actions/upload-artifact@v4
         with:
           name: windows-zip
