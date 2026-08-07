@@ -98,20 +98,37 @@ void main() async {
   // ici, avant runApp() : AudiobookHandler doit vivre pour toute la session,
   // pas être recréé à chaque ouverture de l'écran de lecture (voir
   // audiobook_handler.dart pour le détail de cette décision).
-  final audiobookHandler = await AudioService.init(
-    builder: () => AudiobookHandler(),
-    config: const AudioServiceConfig(
-      androidNotificationChannelId: 'com.example.libraria.audio',
-      androidNotificationChannelName: 'Lecture audiobook',
-      androidNotificationIcon: 'mipmap/ic_launcher',
-      // [Correctif] `androidNotificationOngoing: true` impose (assert du
-      // package) `androidStopForegroundOnPause: true` (valeur par défaut,
-      // donc pas besoin de le préciser) -- la combinaison inverse plantait
-      // au démarrage : "The androidNotificationOngoing will make no effect
-      // with androidStopForegroundOnPause set to false".
-      androidNotificationOngoing: true,
-    ),
-  );
+  // [Correctif Windows] `audio_service` ne liste officiellement que
+  // Android/iOS/web/Linux comme plateformes supportées (package audio_service_win
+  // séparé et non ajouté ici pour Windows). Sans implémentation native,
+  // AudioService.init() reste bloqué indéfiniment en attendant une réponse du
+  // plugin qui n'existe pas -- runApp() n'est alors jamais atteint et aucune
+  // fenêtre ne s'affiche (diagnostic : process "Responding" mais
+  // MainWindowHandle=0). Instanciation directe sur les plateformes non
+  // supportées : lecture audio fonctionnelle, juste sans notification /
+  // lockscreen / touches média (à ajouter via audio_service_win si besoin).
+  final bool audioServiceSupported =
+      kIsWeb || Platform.isAndroid || Platform.isIOS || Platform.isLinux;
+
+  final AudiobookHandler audiobookHandler;
+  if (audioServiceSupported) {
+    audiobookHandler = await AudioService.init(
+      builder: () => AudiobookHandler(),
+      config: const AudioServiceConfig(
+        androidNotificationChannelId: 'com.example.libraria.audio',
+        androidNotificationChannelName: 'Lecture audiobook',
+        androidNotificationIcon: 'mipmap/ic_launcher',
+        // [Correctif] `androidNotificationOngoing: true` impose (assert du
+        // package) `androidStopForegroundOnPause: true` (valeur par défaut,
+        // donc pas besoin de le préciser) -- la combinaison inverse plantait
+        // au démarrage : "The androidNotificationOngoing will make no effect
+        // with androidStopForegroundOnPause set to false".
+        androidNotificationOngoing: true,
+      ),
+    );
+  } else {
+    audiobookHandler = AudiobookHandler();
+  }
 
   // [Partie 7] Sur Windows/Linux/macOS (pas de plugin Workmanager desktop/web),
   // passage unique au lancement -- voir bloc Android equivalent plus bas,
