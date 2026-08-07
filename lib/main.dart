@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:workmanager/workmanager.dart';
 import 'library/library_change_notifier.dart';
 
@@ -62,6 +63,16 @@ void callbackDispatcher() {
 /// aucune étape de l'ancien guide — chaque brique y était montrée isolément.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // [Correctif Windows] `sqflite` (pubspec.yaml) ne supporte que Android/iOS.
+  // Sans ceci, DatabaseHelper.database (juste en dessous) echoue silencieusement
+  // sur desktop -- runApp() n'est alors jamais atteint et aucune fenetre ne
+  // s'affiche (process actif mais MainWindowHandle=0). databaseFactoryFfi doit
+  // etre affecte AVANT le tout premier appel a openDatabase() de l'app entiere.
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
 
   final db = await DatabaseHelper.database; // onConfigure (PRAGMA) + schéma/migrations appliqués ici
 
