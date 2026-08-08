@@ -36,6 +36,14 @@ dependencies:
 
   # Lecteur audiobook — arrière-plan, lockscreen, multi-fichiers
   just_audio: ^0.9.40
+  # [Correctif Windows] Implementation Windows de just_audio -- meme categorie
+  # de bug que audio_service_win plus haut : sans ce package, le constructeur
+  # AudioPlayer() (dans AudiobookHandler, instancie inconditionnellement,
+  # meme sur les plateformes ou AudioService.init() est contourne) reste
+  # bloque en attendant une reponse d'un plugin natif qui n'existe pas sur
+  # Windows -- runApp() n'est alors jamais atteint (aucune fenetre ne
+  # s'affiche, memoire en hausse mais MainWindowHandle=0 en continu).
+  just_audio_windows: ^0.2.0
   audio_service: ^0.18.15
 
   # Sécurité / intégrité
